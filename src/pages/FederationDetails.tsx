@@ -3,6 +3,7 @@ import type { RootState } from '../redux/store';
 import Guardians from './Guardian';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useWallet } from '../context/WalletManager';
 import type {
     FederationModule,
     LNModule,
@@ -15,6 +16,7 @@ export default function FederationDetails() {
     const { Details, metaData, GuardianStatus } = useSelector(
         (state: RootState) => state.federationdetails
     );
+    const { wallet } = useWallet();
     const [showGuardians, setShowGuardians] = useState<boolean>(false);
     const [expandedModules, setExpandedModules] = useState<string | null>(null);
     const [healthStatus, setHealthStatus] = useState<
@@ -148,6 +150,11 @@ export default function FederationDetails() {
                         </p>
                     </div>
                     <div className="federation-field">
+                        <h3>🆔 Federation ID</h3>
+                        <span>The unique ID of {metaData?.federation_name}</span>
+                        <p>{wallet.federationId || 'N/A'}</p>
+                    </div>
+                    <div className="federation-field">
                         <h3>💰 On-chain Deposit</h3>
                         <span>Deposit funds from external bitcoin wallets to federation</span>
                         <p>
@@ -160,12 +167,12 @@ export default function FederationDetails() {
                     </div>
                     <div className="federation-field">
                         <h3>📨 Welcome Message</h3>
-                        <span>Welcome message from {metaData?.federation_name} community</span>
+                        <span>Welcome message from {metaData?.federation_name}</span>
                         <p>{metaData?.welcome_message || 'N/A'}</p>
                     </div>
                     <div className="federation-field">
                         <h3>📌 Pinned Message</h3>
-                        <span>Pinned message from {metaData?.federation_name} community</span>
+                        <span>Pinned message from {metaData?.federation_name}</span>
                         <p>{metaData?.pinned_message || 'N/A'}</p>
                     </div>
                     {metaData?.federation_expiry_timestamp && (

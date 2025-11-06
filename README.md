@@ -89,7 +89,9 @@ fedimint-web-wallet/
 
 - Clone the repository
   
-  git clone https://github.com/Harshdev098/fedimint-web-wallet.git
+  ```
+    git clone https://github.com/Harshdev098/fedimint-web-wallet.git
+  ```
   
 - Install the dependencies
   

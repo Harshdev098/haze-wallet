@@ -31,7 +31,7 @@ export const downloadQRCode = (downloadName: string) => {
 };
 
 export const DownloadTransactionsCSV = (transactions: Transactions[]) => {
-    logger.log('transactions are', transactions);
+    if (transactions.length === 0) throw new Error('0 Transactions found');
 
     const headers = [
         'TimeStamp',

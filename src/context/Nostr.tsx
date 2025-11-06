@@ -1,4 +1,3 @@
-// Updated NostrContext with proper subscription management
 import {
     createContext,
     useState,

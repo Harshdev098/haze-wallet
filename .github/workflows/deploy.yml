@@ -16,21 +16,31 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test -- --ci --runInBand
+
   deploy:
+    needs: test
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout Repo
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
+      - name: Setup Nodejs
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
-
+          cache: 'npm'
       - name: Install Dependencies
         run: npm install
 

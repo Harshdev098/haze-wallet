@@ -483,7 +483,7 @@
   content: "";
   height: 20px;
   width: 20px;
-  left: 1px;
+  left: 0px;
   bottom: 1px;
   background: white;
   transition: 0.3s;
