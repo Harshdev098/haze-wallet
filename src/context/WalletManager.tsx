@@ -3,6 +3,7 @@ import { Wallet, setLogLevel, openWallet, getWallet, listClients } from '@fedimi
 import { useNavigate } from 'react-router';
 import webloader from '../assets/loader.webp';
 import logger from '../utils/Logger';
+import { dbCache } from '../utils/WalletCache';
 import { setErrorWithTimeout } from '../redux/slices/Alerts';
 import { setWalletStatus } from '../redux/slices/WalletSlice';
 import type { AppDispatch, RootState } from '../redux/store';
@@ -111,7 +112,30 @@ export const WalletManagerProvider: React.FC<{ children: React.ReactNode }> = ({
                         return cached;
                     }
 
-                    logger.log(`Loading wallet data for ${id}`);
+                    // Check IndexedDB persistent cache
+                    const idbData = await dbCache.getCachedData(currentWallet.federationId);
+
+                    if (idbData.configData && idbData.metaData) {
+                        const walletData: WalletCache = {
+                            wallet: currentWallet,
+                            federationDetails: idbData.configData,
+                            federationMeta: idbData.metaData,
+                        };
+
+                        walletCache.current.set(id, walletData);
+
+                        dispatch(setFederationId(currentWallet.federationId));
+                        dispatch(setWalletId(currentWallet.id));
+                        dispatch(setFederationDetails(idbData.configData));
+                        dispatch(setFederationMetaData(idbData.metaData));
+
+                        logger.log(
+                            `Loaded data for ${id} from IndexedDB`,
+                            currentWallet.federationId,
+                            idbData.configData
+                        );
+                        return walletData;
+                    }
 
                     // Load federation details if not found in cache
                     const federationResult = await fetchFederationDetails(
@@ -136,6 +160,11 @@ export const WalletManagerProvider: React.FC<{ children: React.ReactNode }> = ({
 
                     // Cache the data
                     walletCache.current.set(id, walletData);
+                    dbCache.setData(
+                        currentWallet.federationId,
+                        walletData.federationDetails,
+                        walletData.federationMeta
+                    );
                     return walletData;
                 }
             } catch (error) {
@@ -285,6 +314,7 @@ export const WalletManagerProvider: React.FC<{ children: React.ReactNode }> = ({
                     if (result) {
                         logger.log('wallet loaded successfully', result.wallet);
                         globalWalletState.wallet = result.wallet;
+                        (window as any).wallet = result.wallet;
                         globalWalletState.isInitialized = true;
                         dispatch(setWalletStatus('open'));
                     } else {

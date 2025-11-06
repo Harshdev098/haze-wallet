@@ -122,8 +122,8 @@ export const searchTransaction = createAsyncThunk<
 
     const time = 'N/A';
     if (
-        time &&
         typeof time === 'object' &&
+        time &&
         'secs_since_epoch' in time &&
         'nanos_since_epoch' in time
     ) {

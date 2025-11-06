@@ -26,9 +26,7 @@ export default function Activities() {
     const [expandedId, setExpandedId] = useState<string | null>(null);
     const { walletId, recoveryState } = useSelector((state: RootState) => state.activeFederation);
     const [onchainDetails, setOnchainDetails] = useState<Record<string, OnchainTxDetail>>({});
-    const [depositStates, setDepositStates] = useState<
-        Record<string, { txid?: string }>
-    >({});
+    const [depositStates, setDepositStates] = useState<Record<string, { txid?: string }>>({});
     const navigate = useNavigate();
 
     const toggleExpanded = (id: string) => {
@@ -127,8 +125,6 @@ export default function Activities() {
                         )}
                     </div>
                 );
-            } else if (tx.type === 'withdraw') {
-
             }
         }
         return null;
@@ -168,9 +164,8 @@ export default function Activities() {
             } else if (tx.kind === 'wallet' && tx.type === 'withdraw') {
                 // const unsubscribe = wallet.wallet.subscribeWithdraw(
                 //     tx.operationId,
-                //     (state: WalletWithdrawState) => { 
+                //     (state: WalletWithdrawState) => {
                 //         if (state === 'Confirmed') {
-
                 //         }
                 //         if (txid) {
                 //             setDepositStates((prev) => ({
@@ -195,11 +190,11 @@ export default function Activities() {
             dispatch(resetTransactions());
             dispatch(fetchTransactions({ limit: 5, wallet }));
         }
-    }, [wallet, walletId]);
+    }, [wallet, walletId, recoveryState.status]);
 
     useEffect(() => {
         fetchTx();
-    }, [wallet, walletId]);
+    }, [wallet, walletId, recoveryState.status]);
 
     return (
         <div className="activities-wrapper">
@@ -255,8 +250,8 @@ export default function Activities() {
                                                             {tx.kind === 'mint'
                                                                 ? 'ecash'
                                                                 : tx.kind === 'wallet'
-                                                                    ? 'onchain'
-                                                                    : 'lightning'}
+                                                                  ? 'onchain'
+                                                                  : 'lightning'}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -269,8 +264,8 @@ export default function Activities() {
                                                             {isPositive
                                                                 ? '+'
                                                                 : isNegative
-                                                                    ? '-'
-                                                                    : ''}
+                                                                  ? '-'
+                                                                  : ''}
                                                             {tx.amountMsats} sat
                                                         </p>
                                                         {tx.outcome && (
@@ -309,8 +304,8 @@ export default function Activities() {
                                                                     {tx.kind === 'mint'
                                                                         ? 'ecash'
                                                                         : tx.kind === 'wallet'
-                                                                            ? 'onchain'
-                                                                            : 'lightning'}
+                                                                          ? 'onchain'
+                                                                          : 'lightning'}
                                                                 </span>
                                                             </div>
                                                             <div className="detail-group">

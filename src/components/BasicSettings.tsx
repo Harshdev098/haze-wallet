@@ -133,7 +133,6 @@ export default function BasicSettings() {
         try {
             startProgress();
             const transactions = await wallet.federation.listTransactions();
-            if (transactions.length === 0) throw new Error('0 Transactions found');
             DownloadTransactionsCSV(transactions);
         } catch (err) {
             logger.log('an error occured');

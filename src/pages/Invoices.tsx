@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { useWallet } from '../context/WalletManager';
-import type { Transactions } from '@fedimint/core-web';
+import type { LnPayState, LnReceiveState, Transactions } from '@fedimint/core-web';
 import type { InvoiceState } from '../hooks/wallet.type';
 import { startProgress, doneProgress } from '../utils/ProgressBar';
 import { setInvoiceExpiry } from '../redux/slices/LightningPayment';
@@ -94,7 +94,7 @@ export default function Invoices() {
 
                         const unsubscribe = wallet.lightning.subscribeLnReceive(
                             transaction.operationId,
-                            async (state) => {
+                            async (state: LnReceiveState) => {
                                 if (state === 'funded' || state === 'claimed') {
                                     currentState = state;
                                 } else if (
@@ -117,7 +117,7 @@ export default function Invoices() {
                                     );
                                 }
                             },
-                            (error) => {
+                            (error: string) => {
                                 logger.log('an error occured', error);
                             }
                         );
@@ -129,7 +129,7 @@ export default function Invoices() {
 
                         const unsubscribe = wallet.lightning.subscribeLnPay(
                             transaction.operationId,
-                            async (state) => {
+                            async (state: LnPayState) => {
                                 if (state === 'created' || state === 'awaiting_change') {
                                     currentState = state;
                                 } else if (typeof state === 'object' && 'success' in state) {
@@ -149,7 +149,7 @@ export default function Invoices() {
                                     );
                                 }
                             },
-                            (error) => {
+                            (error: string) => {
                                 logger.log('an error occured', error);
                             }
                         );
