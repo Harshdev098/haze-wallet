@@ -124,7 +124,7 @@ export default function Invoices() {
                         setTimeout(() => {
                             unsubscribe?.();
                         }, 600000);
-                    } else if (transaction.kind === 'ln' && transaction.type === 'send') {
+                    } else if (transaction.kind === 'ln' && transaction.type === 'pay') {
                         const { invoice, operationId, timestamp } = transaction;
 
                         const unsubscribe = wallet.lightning.subscribeLnPay(

@@ -13,7 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@fedimint/core-web": "^0.0.0-dev-test3-8f5bd196fa69309b9166fe9e76f076275c1210af",
+    "@fedimint/core-web": "0.0.0-dev-test3-e244a985452c5a2db483bcb91a1f5d6ff2267bda",
     "@mempool/mempool.js": "^3.0.0",
     "@noble/hashes": "^1.8.0",
     "@nostr-dev-kit/ndk": "^2.14.32",

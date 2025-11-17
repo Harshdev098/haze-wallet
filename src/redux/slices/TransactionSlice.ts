@@ -56,7 +56,7 @@ export const fetchTransactions = createAsyncThunk<
                 amountMsats = (tx as EcashTransaction).amountMsats / 1000;
                 outcome = (tx as EcashTransaction).outcome?.toLowerCase() ?? null;
             } else if (tx.kind === 'wallet') {
-                amountMsats = (tx as WalletTransaction).amountMsats;
+                amountMsats = (tx as WalletTransaction).amountSats;
                 outcome = (tx as WalletTransaction).outcome?.toLowerCase() ?? null;
                 onchainAddress = (tx as WalletTransaction).onchainAddress;
                 fee = (tx as WalletTransaction).fee;
