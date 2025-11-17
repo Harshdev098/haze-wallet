@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '../redux/store';
 import Alerts from '../components/Alerts';
 import Navbar from '../components/Navbar';
-import { setJoining, setFederationId, setNewJoin, setWalletId } from '../redux/slices/ActiveWallet';
+import { setNewJoin, setWalletId } from '../redux/slices/ActiveWallet';
+import { setFederationId } from '../redux/slices/FederationDetails';
 import { setErrorWithTimeout } from '../redux/slices/Alerts';
 import {
     JoinFederation as JoinFederationService,
@@ -18,7 +19,7 @@ import DiscoverFederation from '../components/DiscoverFederation';
 import { setWalletStatus } from '../redux/slices/WalletSlice';
 import '../style/JoinFederation.css';
 import QRScanner from '../components/QrScanner';
-import Tippy from '@tippyjs/react';
+import { setRecoverySate } from '../redux/slices/ActiveWallet';
 
 export default function JoinFederation() {
     const [inviteCode, setInviteCode] = useState<string>('');
@@ -31,14 +32,17 @@ export default function JoinFederation() {
     const [recover, setRecover] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
-    const { joining } = useSelector((state: RootState) => state.activeFederation);
+    const [joining, setJoining] = useState<boolean>(false);
     const { error } = useSelector((state: RootState) => state.Alert);
+    const [recovering, setRecovering] = useState<boolean>(false);
 
-    const handleJoinFederation = async (code?: string): Promise<void> => {
-        dispatch(setJoining(true));
+    const handleJoinFederation = async (code?: string, recover?: boolean): Promise<void> => {
+        setJoining(true);
+        if (recover) {
+            setRecovering(true);
+        }
         try {
             startProgress();
-            logger.log('recovery? ', recover);
             const result = await JoinFederationService(
                 code || inviteCode,
                 walletName.current?.value || 'fm-default',
@@ -54,7 +58,8 @@ export default function JoinFederation() {
         } catch (err) {
             dispatch(setErrorWithTimeout({ type: 'Join Error:', message: `${err}` }));
         } finally {
-            dispatch(setJoining(false));
+            setJoining(false);
+            setRecovering(false);
             doneProgress();
         }
     };
@@ -167,25 +172,28 @@ export default function JoinFederation() {
                                                 : 'N/A'}
                                         </span>
                                     </div>
-                                    <label className="recovery-label">
-                                        <input
-                                            type="checkbox"
-                                            checked={recover}
-                                            onChange={(e) => setRecover(e.target.checked)}
-                                        />
-                                        Recover Wallet{' '}
-                                        <Tippy content="It will recover your wallet instead creating new one">
-                                            <i className="fa-solid fa-info-circle"></i>
-                                        </Tippy>
-                                    </label>
-                                    <button
-                                        onClick={() => {
-                                            handleJoinFederation();
-                                        }}
-                                        disabled={joining}
-                                    >
-                                        {joining ? 'Joining...' : 'Join'}
-                                    </button>
+                                    <div className="preview-action-btn">
+                                        <button
+                                            onClick={() => {
+                                                handleJoinFederation();
+                                            }}
+                                            disabled={joining}
+                                        >
+                                            <i className="fa-solid fa-arrow-right-to-bracket"></i>{' '}
+                                            {joining ? 'Joining...' : 'Join'}
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setRecover(true);
+                                                dispatch(setRecoverySate({ status: true }));
+                                                handleJoinFederation(undefined, true);
+                                            }}
+                                            disabled={recovering}
+                                        >
+                                            <i className="fa-solid fa-rotate-right"></i>{' '}
+                                            {recovering ? 'Recovering...' : 'Recover'}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

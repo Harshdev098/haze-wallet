@@ -17,7 +17,7 @@ import logger from '../utils/Logger';
 export const JoinFederation = async (
     inviteCode: string,
     walletName: string,
-    recover: boolean
+    recover?: boolean
 ): Promise<Wallet> => {
     try {
         logger.log('Joining federation with invite code:', inviteCode, walletName);
@@ -30,7 +30,7 @@ export const JoinFederation = async (
 
         logger.log('mnemonic is ', mnemonics);
         // const result = await joinFederation(inviteCode);
-        const result = await joinFederation(inviteCode, recover);
+        const result = await joinFederation(inviteCode, recover || false);
         logger.log('join federation result ', result);
 
         if (result) {

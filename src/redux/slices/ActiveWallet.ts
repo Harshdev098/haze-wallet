@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { FederationID } from '../../hooks/Federation.type';
 
 interface activeWallet {
-    joining: boolean;
-    federationId: string;
     walletId: string;
     newJoin: boolean;
     recoveryState: {
@@ -14,8 +11,6 @@ interface activeWallet {
     };
 }
 const initialState: activeWallet = {
-    joining: false,
-    federationId: '',
     walletId: '',
     newJoin: false,
     recoveryState: { status: false, progress: { complete: 0, total: 0 }, moduleId: 0 },
@@ -25,12 +20,6 @@ export const ActiveWalletSlice = createSlice({
     name: 'ActiveWallet',
     initialState,
     reducers: {
-        setJoining: (state, action: PayloadAction<boolean>) => {
-            state.joining = action.payload;
-        },
-        setFederationId: (state, action: PayloadAction<FederationID>) => {
-            state.federationId = action.payload;
-        },
         setNewJoin: (state, action: PayloadAction<boolean>) => {
             state.newJoin = action.payload;
         },
@@ -54,7 +43,6 @@ export const ActiveWalletSlice = createSlice({
     },
 });
 
-export const { setJoining, setFederationId, setNewJoin, setWalletId, setRecoverySate } =
-    ActiveWalletSlice.actions;
+export const { setNewJoin, setWalletId, setRecoverySate } = ActiveWalletSlice.actions;
 
 export default ActiveWalletSlice.reducer;

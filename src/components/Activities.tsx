@@ -220,7 +220,7 @@ export default function Activities() {
                                     const isPositive = ['receive', 'reissue', 'deposit'].includes(
                                         tx.type
                                     );
-                                    const isNegative = ['send', 'spend_oob', 'withdraw'].includes(
+                                    const isNegative = ['pay', 'spend_oob', 'withdraw'].includes(
                                         tx.type
                                     );
                                     return (

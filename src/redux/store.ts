@@ -22,6 +22,7 @@ export const store = configureStore({
         Mode: Mode,
         Alert: AlertSlice,
         transaction: TransactionsSlice,
+        activeWallet: ActiveWalletSlice,
     },
 });
 

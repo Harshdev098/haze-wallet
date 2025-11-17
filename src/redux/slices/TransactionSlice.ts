@@ -40,7 +40,7 @@ export const fetchTransactions = createAsyncThunk<
             let amountMsats = 0;
             let gateway = null;
             let onchainAddress = null;
-            let fee = null;
+            let fee = 0;
             const kind = tx.kind;
             const timestamp = new Date(tx.timestamp).toLocaleString();
             const operationId = tx.operationId;
@@ -51,7 +51,7 @@ export const fetchTransactions = createAsyncThunk<
                 outcome = (tx as LightningTransaction).outcome.toLowerCase() ?? null;
                 gateway = (tx as LightningTransaction).gateway || 'N/A';
                 amountMsats = (await parseBolt11Invoice(invoice)).amount;
-                fee = (tx as LightningTransaction).fee;
+                fee = (tx as LightningTransaction).fee ?? 0;
             } else if (tx.kind === 'mint') {
                 amountMsats = (tx as EcashTransaction).amountMsats / 1000;
                 outcome = (tx as EcashTransaction).outcome?.toLowerCase() ?? null;

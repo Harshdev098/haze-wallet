@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { FederationConfig, FederationMetaData } from '../hooks/Federation.type';
 import { fetchFederationDetails } from '../services/FederationService';
 import { setWalletId } from '../redux/slices/ActiveWallet';
-import { setFederationId } from '../redux/slices/ActiveWallet';
+import { setFederationId } from '../redux/slices/FederationDetails';
 import { setFederationDetails, setFederationMetaData } from '../redux/slices/FederationDetails';
 import { startProgress, doneProgress } from '../utils/ProgressBar';
 import LoadingContext from './Loading';
@@ -321,10 +321,9 @@ export const WalletManagerProvider: React.FC<{ children: React.ReactNode }> = ({
                         throw new Error('Failed to load initial wallet');
                     }
                 } else {
-                    logger.log('No wallet found, redirecting to home');
+                    logger.log('No wallet found, while initalizing the wallet');
                     globalWalletState.isInitialized = true;
                     dispatch(setWalletStatus('closed'));
-                    navigate('/');
                 }
             } catch (error) {
                 logger.error('Failed to load initial wallet:', error);
@@ -336,7 +335,7 @@ export const WalletManagerProvider: React.FC<{ children: React.ReactNode }> = ({
                         message: error instanceof Error ? error.message : 'Failed to load wallet',
                     })
                 );
-                navigate('/');
+                navigate('/create');
             }
         })();
 

@@ -335,68 +335,42 @@ nav {
     text-decoration: underline;
 }
 
-.RecoverWalletForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    padding: 24px;
-    gap: 16px;
-    border-radius: 0 0 12px 12px;
-    background: #f7f9fa;
-}
-
-.RecoverWalletForm label {
-    text-align: left;
-    font-weight: 600;
-    font-size: 14px;
-    color: #374151;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.RecoverWalletForm textarea {
+.preview-action-btn {
     width: 100%;
-    min-height: 120px;
-    font-size: 15px;
-    padding: 12px 14px;
-    box-sizing: border-box;
-    border-radius: 6px;
-    border: 1.5px solid #e2e8f0;
-    resize: vertical;
-    background: #ffffff;
-    color: #1e293b;
-    font-weight: 400;
-    transition: all 0.15s ease;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: stretch;
 }
 
-.RecoverWalletForm textarea:focus {
-    border-color: #3b82f6;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.RecoverWalletForm textarea::placeholder {
-    color: #9ca3af;
-    font-size: 14px;
-}
-
-.RecoverWalletForm button {
-    background: #3b82f6;
-    color: #ffffff;
+.preview-action-btn button {
+    flex: 1;
+    max-width: 50%;
+    padding: 10px 0;
+    text-align: center;
     border: none;
-    padding: 12px 18px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.15s ease;
 }
 
-.RecoverWalletForm button:hover {
-    background: #2563eb;
+.preview-action-btn button:first-child {
+    margin-right: 8px;
 }
 
+@media (max-width: 480px) {
+    .preview-action-btn {
+        flex-direction: column;
+    }
+
+    .preview-action-btn button {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .preview-action-btn button:first-child {
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+}
 
 /* Integrated Footer Design */
 footer {

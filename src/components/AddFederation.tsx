@@ -2,7 +2,7 @@ import { useRef, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tippy from '@tippyjs/react';
 import type { RootState, AppDispatch } from '../redux/store';
-import { setJoining, setWalletId } from '../redux/slices/ActiveWallet';
+import { setWalletId } from '../redux/slices/ActiveWallet';
 import LoadingContext from '../context/Loading';
 import Alerts from './Alerts';
 import { JoinFederation as JoinFederationService } from '../services/FederationService';
@@ -26,7 +26,7 @@ export default function AddFederation({
     const { setWallet, switchWallet } = useWallet();
     const [recover, setRecover] = useState<boolean>(false);
     const dispatch = useDispatch<AppDispatch>();
-    const { joining } = useSelector((state: RootState) => state.activeFederation);
+    const [joining, setJoining] = useState<boolean>(false);
     const { error } = useSelector((state: RootState) => state.Alert);
 
     const handleJoinFederation = async (e?: React.FormEvent, qrData?: string): Promise<void> => {
@@ -34,7 +34,7 @@ export default function AddFederation({
 
         const code = inviteCode || qrData;
         if (!code) return; // invitecode should not be empty
-        dispatch(setJoining(true));
+        setJoining(true);
 
         try {
             startProgress();
@@ -61,7 +61,7 @@ export default function AddFederation({
                 })
             );
         } finally {
-            dispatch(setJoining(false));
+            setJoining(false);
             doneProgress();
             setJoinForm(false);
             setLoader(false);

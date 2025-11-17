@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import type { FederationConfig } from '../hooks/Federation.type';
 import LoadingContext from '../context/Loading';
 import webloader from '../assets/loader.webp';
+import SendReceiveFAB from '../components/SendReceiveFAB';
 
 export default function Main() {
     const dispatch = useDispatch<AppDispatch>();
@@ -150,6 +151,7 @@ export default function Main() {
                         </div>
                     </div>
                 )}
+                <SendReceiveFAB />
             </main>
         )
     );

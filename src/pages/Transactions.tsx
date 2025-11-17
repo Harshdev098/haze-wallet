@@ -293,7 +293,7 @@ export default function Transactions() {
                                             'deposit',
                                         ].includes(tx.type);
                                         const isNegative = [
-                                            'send',
+                                            'pay',
                                             'spend_oob',
                                             'withdraw',
                                         ].includes(tx.type);
