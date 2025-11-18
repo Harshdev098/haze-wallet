@@ -43,6 +43,7 @@ export default function Settings() {
         if (!recoveryState.status) {
             walletDetails();
         }
+        document.title = 'Haze Wallet | Settings';
     }, [walletDetails, recoveryState.status]);
 
     useEffect(() => {

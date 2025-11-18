@@ -36,6 +36,7 @@ export default function FederationDetails() {
         pubKey: Details?.broadcast_public_keys[key],
         status: GuardianStatus.status[Number(key)] || 'checking',
     }));
+    document.title = 'Haze Wallet | Federation';
 
     const onlineGuardians = guardians.filter((g) => g.status === 'online').length;
     const totalGuardians = guardians.length;

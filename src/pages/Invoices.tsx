@@ -32,6 +32,7 @@ export default function Invoices() {
     const { error } = useSelector((state: RootState) => state.Alert);
     const [currentPage, setCurrentPage] = useState(1);
     const pageLimint = 5;
+    document.title = 'Haze Wallet | Invoices';
 
     const handleInvoiceExpiry = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;

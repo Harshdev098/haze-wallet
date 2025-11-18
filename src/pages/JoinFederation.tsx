@@ -35,6 +35,7 @@ export default function JoinFederation() {
     const [joining, setJoining] = useState<boolean>(false);
     const { error } = useSelector((state: RootState) => state.Alert);
     const [recovering, setRecovering] = useState<boolean>(false);
+    document.title = 'Haze Wallet | Create Wallet';
 
     const handleJoinFederation = async (code?: string, recover?: boolean): Promise<void> => {
         setJoining(true);
@@ -205,7 +206,8 @@ export default function JoinFederation() {
                         <div>
                             <h2>Join Federation</h2>
                             <p style={{ fontSize: '1.2rem' }}>
-                                Create your first Fedimint Wallet by joining a federation today!
+                                Create your first Fedimint based Wallet by joining a federation
+                                today!
                             </p>
                         </div>
                         <div className="JoinFedBox">

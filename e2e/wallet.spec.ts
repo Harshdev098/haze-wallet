@@ -12,7 +12,7 @@ test.describe('Federation Join + Lightning Flow', () => {
 
     test('join federation and do a receive/send cycle', async ({ page }) => {
         await page.goto('/');
-        await expect(page).toHaveTitle(/Fedimint/);
+        await expect(page).toHaveTitle(/Haze/);
 
         // Step 1: Join federation
         await test.step('Join federation with invite code', async () => {

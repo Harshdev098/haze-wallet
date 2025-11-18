@@ -4,22 +4,22 @@ import wasm from 'vite-plugin-wasm';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-    base: '/fedimint-web-wallet',
+    base: '/haze-wallet',
     plugins: [
         react(),
         wasm(),
         VitePWA({
             registerType: 'autoUpdate',
             manifest: {
-                name: 'Fedimint Web Wallet',
+                name: 'Haze Wallet',
                 short_name: 'Wallet',
-                start_url: '/fedimint-web-wallet/',
+                start_url: '/haze-wallet/',
                 display: 'standalone',
                 background_color: '#e5f1ffff',
                 theme_color: '#111827',
                 icons: [
                     {
-                        src: '/fedimint-web-wallet/logo.webp',
+                        src: '/haze-wallet/logo.png',
                         sizes: '192x192',
                         type: 'image/webp',
                     },

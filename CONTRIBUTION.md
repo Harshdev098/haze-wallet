@@ -1,4 +1,4 @@
-Welcome to Fediming Web Wallet, a fedimint project which is build to make fedimint accesible via web to the users to custody their bitcoins and transact with them, before contributing to the project 
+Welcome to Haze Wallet, a fedimint project which is build to make fedimint accesible via web to the users to custody their bitcoins and transact with them, before contributing to the project 
 please go through our contribution guidelines and be adhere to the points. If you have any doubts about guidelines or contributing to the project, please open an issue regarding that, we will help for the same.
 
 ## Technical Note

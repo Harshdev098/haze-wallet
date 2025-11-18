@@ -1,5 +1,5 @@
 {
-  description = "fedimint web wallet development environment";
+  description = "Haze Wallet, a fedimint web wallet development environment";
   
 
   inputs = {

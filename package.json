@@ -1,5 +1,5 @@
 {
-  "name": "fedimint-web-wallet",
+  "name": "haze-wallet",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,10 +13,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@fedimint/core-web": "0.0.0-dev-test3-e244a985452c5a2db483bcb91a1f5d6ff2267bda",
+    "@fedimint/core-web": "^0.0.0-dev-test3-e244a985452c5a2db483bcb91a1f5d6ff2267bda",
     "@mempool/mempool.js": "^3.0.0",
     "@noble/hashes": "^1.8.0",
-    "@nostr-dev-kit/ndk": "^2.14.32",
+    "@nostr-dev-kit/ndk": "2.14.32",
     "@nostr-dev-kit/ndk-cache-dexie": "^2.6.33",
     "@reduxjs/toolkit": "^2.8.0",
     "@scure/bip32": "^1.7.0",
@@ -61,5 +61,8 @@
     "vite": "^6.3.5",
     "vite-plugin-pwa": "^1.0.2",
     "vite-plugin-wasm": "^3.4.1"
+  },
+  "overrides": {
+    "@nostr-dev-kit/ndk": "2.14.32"
   }
 }

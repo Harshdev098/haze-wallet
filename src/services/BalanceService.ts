@@ -37,8 +37,8 @@ export const fetchExchangeRates = async () => {
             localStorage.setItem('eurRate', data.bitcoin.eur);
         }
         return {
-            usd: data.bitcoin.usd,
-            eur: data.bitcoin.eur,
+            usd: data.bitcoin.usd ?? localStorage.getItem('usdRate'),
+            eur: data.bitcoin.eur ?? localStorage.getItem('eurRate'),
         };
     } catch (err) {
         logger.log('an error occured while fetching exchange rates', err);

@@ -172,8 +172,8 @@ export default function NostrSettings() {
                                 />
 
                                 <p className="title-span">
-                                    You can give a preferred relay for the specific app, Fedimint
-                                    will use a getalby relay as default to generate the URI
+                                    You can give a preferred relay for the specific app, wallet will
+                                    use a getalby relay as default to generate the URI
                                 </p>
                             </div>
 

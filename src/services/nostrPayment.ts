@@ -87,7 +87,7 @@ export const handleNWCConnection = async (ndk: NDK, relay: string | null, appNam
     });
     infoEvent.tags = [
         ['p', walletNostrPubKey],
-        ['d', 'Fedimint Wallet'],
+        ['d', 'Haze Wallet'],
     ];
 
     infoEvent
@@ -327,7 +327,7 @@ export const handleNostrPayment = async (wallet: Wallet, walletNostrPubKey: stri
                                 'payment_sent',
                                 'payment_received',
                             ],
-                            alias: 'Fedimint Wallet',
+                            alias: 'Haze Wallet',
                             color: '#1570cbff',
                             pubkey: `${walletNostrPubKey}`,
                             network: 'regtest',

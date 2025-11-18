@@ -21,6 +21,7 @@ export default function Balance() {
     const [OpenEcashNotes, setOpenEcashNotes] = useState<boolean>(false);
     const [hidden, setHidden] = useState<boolean>(false);
     const balanceSectionRef = useRef<HTMLElement>(null);
+    document.title = 'Haze Wallet | Home';
 
     // Fetch balance
     const fetchBal = useCallback(() => {

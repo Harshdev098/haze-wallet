@@ -1,10 +1,10 @@
-import logo from '../assets/logo.webp';
+import logo from '../assets/logo.png';
 
 export default function Navbar() {
     return (
         <>
             <nav>
-                <img src={logo} alt="Fedimint Wallet" width={'180vw'} />
+                <img src={logo} alt="Haze Wallet(a fedimint web wallet)" width={'180vw'} />
             </nav>
         </>
     );

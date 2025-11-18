@@ -46,6 +46,7 @@ export default function Transactions() {
         Record<string, { state: WalletDepositState; txid?: string }>
     >({});
     const limit = 5;
+    document.title = 'Haze Wallet | Transactions';
 
     useEffect(() => {
         if (query.trim() !== '') {

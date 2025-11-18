@@ -8,7 +8,7 @@ import App from './App.tsx';
 createRoot(document.getElementById('root')!).render(
     <>
         <Provider store={store}>
-            <BrowserRouter basename="/fedimint-web-wallet">
+            <BrowserRouter basename="/haze-wallet">
                 <App />
             </BrowserRouter>
         </Provider>

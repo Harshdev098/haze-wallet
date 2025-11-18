@@ -59,7 +59,7 @@ function AppInitializer({ children }: { children: React.ReactNode }) {
                 // If we have a target wallet ID and it exists, navigate to wallet
                 if (targetWalletId && hasWallet(targetWalletId)) {
                     logger.log('Found existing wallet');
-                    if (!window.location.pathname.startsWith('/fedimint-web-wallet/wallet')) {
+                    if (!window.location.pathname.startsWith('/haze-wallet/wallet')) {
                         navigate('/wallet');
                     }
                 } else if (walletList.length > 0) {
@@ -67,7 +67,7 @@ function AppInitializer({ children }: { children: React.ReactNode }) {
                     // If we have wallets but no specific target, use the first one
                     localStorage.setItem('activeWallet', walletList[0].id);
                     localStorage.setItem('lastUsedWallet', walletList[0].id);
-                    if (!window.location.pathname.startsWith('/fedimint-web-wallet/wallet')) {
+                    if (!window.location.pathname.startsWith('/haze-wallet/wallet')) {
                         navigate('/wallet');
                     }
                 } else {

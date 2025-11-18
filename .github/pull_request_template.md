@@ -38,4 +38,4 @@ What type of changes does your code introduce? (Check all that apply)
 
 ---
 
-*Thank you for contributing to Fedimint-web-wallet! We look forward to reviewing your PR and getting it merged!*
+*Thank you for contributing to Haze Wallet! We look forward to reviewing your PR and getting it merged!*
